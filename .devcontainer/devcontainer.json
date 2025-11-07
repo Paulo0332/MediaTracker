@@ -1,0 +1,25 @@
+{
+    "name": "MediaTracker",
+
+    "dockerComposeFile":[
+        "../docker-compose.yml"
+    ],
+
+    "service": "web",
+
+    "workspaceFolder": "/usr/src/app",
+
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "batisteo.vscode-django",
+                "ms-python.python",
+                "esbenp.prettier-vscode",
+                "ms-azuretools.vscode-docker"
+            ]
+        }
+    },
+
+    "remoteUser": "vscode"
+
+}
