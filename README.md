@@ -5,19 +5,16 @@
 ---
 
 ## 📘 Table of Contents
-- [About](#about)
-- [Features](#features)
-- [Tech Stack](#tech-stack)
-- [Project Structure](#project-structure)
-- [Setup & Installation](#setup--installation)
-- [Environment Variables](#environment-variables)
-- [Running the Application](#running-the-application)
-- [Usage](#usage)
-- [Docker Setup](#docker-setup)
-- [Testing](#testing)
-- [Troubleshooting](#troubleshooting)
-- [Contributing](#contributing)
-- [License](#license)
+- [📺 Media Tracker - (🚧 In development 🚧)](#-media-tracker----in-development-)
+  - [📘 Table of Contents](#-table-of-contents)
+  - [🧩 About](#-about)
+  - [✨ Features](#-features)
+  - [🧰 Tech Stack](#-tech-stack)
+  - [📁 Project Structure](#-project-structure)
+  - [⚙️ Setup \& Installation](#️-setup--installation)
+    - [📚 Prerequisites](#-prerequisites)
+    - [📝 Installation Steps](#-installation-steps)
+  - [🔨 Next sections coming soon!](#-next-sections-coming-soon)
 
 ---
 
@@ -77,7 +74,7 @@ List of key features or functionality.
 
 The project uses Docker Compose to orchestrate the entire stack (Django web service and PostgreSQL database). The development environment is configured for zero-setup using VS Code Dev Containers.
 
-### Prerequisites
+### 📚 Prerequisites
 
 You must have the following tools installed on your host machine:
 
@@ -85,7 +82,7 @@ You must have the following tools installed on your host machine:
 2.  **Visual Studio Code (VS Code):**
 3.  **VS Code Dev Containers Extension:** (Installed inside VS Code)
 
-### Installation Steps
+### 📝 Installation Steps
 
 1.  **Clone the Repository**
     ```bash
