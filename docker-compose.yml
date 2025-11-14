@@ -1,7 +1,7 @@
 services:
   web:
     build: .
-    entrypoint: /usr/local/bin/wait_for_db.sh
+    entrypoint: ["/usr/local/bin/wait_for_db.sh", "db", "5432"]
     command: ["python", "manage.py", "runserver", "0.0.0.0:8000"]
     volumes:
       - ./backend:/usr/src/app
