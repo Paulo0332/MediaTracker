@@ -16,14 +16,14 @@ COPY requirements.txt /usr/src/app
 RUN pip install --no-cache-dir -r requirements.txt
 
 # 6 - Entrypoint script setup
-COPY ./wait_for_db.sh /usr/src/app/
-RUN chmod +x /usr/src/app/wait_for_db.sh
+COPY ./wait_for_db.sh /usr/local/bin/wait_for_db.sh
+RUN chmod +x /usr/local/bin/wait_for_db.sh
 
 # 7 - Copy the rest of the application code
-COPY . /usr/src/app
+COPY ./backend /usr/src/app
 
 # 8 - Defines the wrapper program (wait_for_db script) that always run first
-ENTRYPOINT [ "/usr/src/app/wait_for_db" ]
+ENTRYPOINT [ "wait_for_db.sh" ]
 
 # 9 - Define the default arguments passed to the entrypoint
 CMD [ "python", "manage.py", "runserver", "0.0.0.0:8000"]
