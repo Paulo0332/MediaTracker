@@ -9,6 +9,7 @@ ENV PYTHONUNBUFFERED 1
 
 # 4 - Install netcat for the entrypoint script
 RUN apt-get update && apt-get install -y\
+ make\    
  netcat-traditional\
  git\
 && rm -rf /var/lib/apt/lists/*
