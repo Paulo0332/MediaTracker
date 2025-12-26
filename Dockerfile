@@ -8,7 +8,10 @@ WORKDIR /usr/src/app
 ENV PYTHONUNBUFFERED 1
 
 # 4 - Install netcat for the entrypoint script
-RUN apt-get update && apt-get install -y netcat-traditional\
+RUN apt-get update && apt-get install -y\
+ make\    
+ netcat-traditional\
+ git\
 && rm -rf /var/lib/apt/lists/*
 
 # 5 - Copy dependencies list and install them
@@ -20,10 +23,10 @@ COPY ./wait_for_db.sh /usr/local/bin/wait_for_db.sh
 RUN chmod +x /usr/local/bin/wait_for_db.sh
 
 # 7 - Copy the rest of the application code
-COPY ./backend /usr/src/app
+COPY ./backend /usr/src/app/backend/
 
 # 8 - Defines the wrapper program (wait_for_db script) that always run first
 ENTRYPOINT [ "wait_for_db.sh" ]
 
 # 9 - Define the default arguments passed to the entrypoint
-CMD [ "python", "manage.py", "runserver", "0.0.0.0:8000"]
+CMD [ "python", "backend/manage.py", "runserver", "0.0.0.0:8000"]
