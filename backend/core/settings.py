@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     # My apps
     'accounts.apps.AccountsConfig',
     'media.apps.MediaConfig',
+    'user_media.apps.UserMediaConfig'
 ]
 
 MIDDLEWARE = [
