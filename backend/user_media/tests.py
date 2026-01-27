@@ -1,5 +1,6 @@
 from django.test import TestCase
 from django.db import IntegrityError
+from django.core.exceptions import ValidationError
 from django.contrib.auth import get_user_model
 from user_media.models import UserMediaList
 from media.models import Media
@@ -25,3 +26,15 @@ class UserMediaTestCase(TestCase):
 
         with self.assertRaises(IntegrityError):
             UserMediaList.objects.create(user=self.user,media=self.media,status=UserMediaList.Status.COMPLETED)
+
+    def test_rating_plan_start(self):
+        entry = UserMediaList(user=self.user, media=self.media, status=UserMediaList.Status.PLAN_TO_START, rating=10)
+        
+        with self.assertRaises(ValidationError):
+            entry.full_clean()
+
+    def test_review_plan_start(self):
+        entry = UserMediaList(user=self.user, media=self.media, status=UserMediaList.Status.PLAN_TO_START, review="Rocky is an excellent movie!")
+        
+        with self.assertRaises(ValidationError):
+            entry.full_clean()
