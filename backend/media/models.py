@@ -15,7 +15,7 @@ class Media(MetaTime):
     class MediaType(models.TextChoices):
         ANIME = "AN", "ANIME"
         MOVIE = "MV", "MOVIE"
-        SERIE = "SR", "SERIE"
+        SERIES = "SR", "SERIES"
         BOOK = "BK", "BOOK"
         ALBUM = "AL", "ALBUM"
         GAME = "GM", "GAME"
