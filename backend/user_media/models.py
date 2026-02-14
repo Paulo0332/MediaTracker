@@ -25,15 +25,18 @@ class UserMediaList(MetaTime):
 
     def clean(self):
         super().clean()
+        
+        if self.status == self.Status.PLAN_TO_START:
+            error_message = "You can't rate or review something you didn't even start!"
+            errors = {}
+            if self.review:
+                errors['review'] = error_message
+            if self.rating:
+                errors['rating'] = error_message
 
-        if (self.rating is not None or self.review is not None) and self.status in [self.Status.PLAN_TO_START]:
-                error_message = "You can't rate or review something you didn't even start!"
-                raise ValidationError({
-                    "rating": ValidationError(message=error_message, code="invalid_interaction_status"),
-                    "review": ValidationError(message=error_message, code="invalid_interaction_status")
-                      }
-                )
-
+            if errors:
+                raise ValidationError(errors)
+            
     status = models.CharField(verbose_name="Status",max_length=3, choices=Status.choices, default=Status.PLAN_TO_START)
     rating = models.IntegerField(validators=[MinValueValidator(1),MaxValueValidator(10)],blank=True, null=True)
     review = models.TextField(verbose_name="User's Review", max_length=1000,blank=True)
