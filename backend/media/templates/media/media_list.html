@@ -1,0 +1,9 @@
+<h1> Universal Library </h1>
+<ul>
+    {% for item in all_media %}
+        <li>{{ item.title }} - {{ item.get_media_type_display }}</li>
+    {% empty %}
+        <li> The library is empty!</li>
+    {% endfor %}
+
+</ul>
