@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block site_title %}{{ block.super }} | Library {% endblock site_title %}
+
+{% block content %}
+    <h1> Universal Library </h1>
+        <ul>
+            {% for item in all_media %}
+            <li>
+                <a href="{{ item.get_absolute_url }}">
+                    {{ item.title }} - {{ item.get_media_type_display }}
+                </a>
+            </li>
+            {% empty %}
+            <li> The library is empty!</li>
+            {% endfor %}
+            
+        </ul>
+{% endblock content %}
