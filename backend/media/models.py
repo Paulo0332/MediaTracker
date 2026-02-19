@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 # Create your models here.
 
@@ -28,6 +29,10 @@ class Media(MetaTime):
     cover = models.URLField(verbose_name="URL Cover", blank=True,null=True)
     external_id = models.CharField(verbose_name="API Id's", max_length=255,unique=True, db_index=True)
 
+    def get_absolute_url(self):
+        return reverse("media:media-detail", kwargs={"pk": self.pk})
+    
+    
     def __str__(self):
         return f"{self.title} - ({self.get_media_type_display()})"
 
