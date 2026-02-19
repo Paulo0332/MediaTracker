@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block site_title %}{{ block.super }}| Details{% endblock site_title %}
+
+{% block content %}
+    <p>Title: {{media.title}}</p>
+    <p>Creator: {{media.creator}}</p>
+    <p>Type: {{media.media_type}}</p>
+    <p>Summary: {{media.summary}}</p>
+    <p>Release date: {{media.release_date}}</p>
+{% endblock content %}
