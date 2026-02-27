@@ -1,19 +1,28 @@
 {% extends "base.html" %}
-
 {% block site_title %}{{ block.super }} | Library {% endblock site_title %}
 
 {% block content %}
     <h1> Universal Library </h1>
-        <ul>
-            {% for item in all_media %}
-            <li>
-                <a href="{{ item.get_absolute_url }}">
-                    {{ item.title }} - {{ item.get_media_type_display }}
-                </a>
-            </li>
-            {% empty %}
-            <li> The library is empty!</li>
-            {% endfor %}
+            <div class="row g-4">
+                
+                {% for item in all_media %}
+                <div class="col-12 col-md-6 col-lg-2">
+                    <div class="card">
+                        {% if item.cover  %}
+                            <img class="card-img-top" src="{{item.cover}}" alt="Image of the {{item.get_media_type_display}}">
+                        {% else %}
+                            <div class="img_placeholder">Cover was not found</div>
+                        {% endif %}    
+                        <div class="card-body">
+                            <a href="{{ item.get_absolute_url }}" class="card-title">
+                                {{ item.title }} - {{ item.get_media_type_display }}
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                {% empty %}
+                    <h5> library is empty! </h5>
+                {% endfor %}
+            </div>
             
-        </ul>
 {% endblock content %}
