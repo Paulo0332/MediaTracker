@@ -1,7 +1,13 @@
 {% extends "base.html" %}
+{% load static %}
 {% block site_title %}{{ block.super }} | Library {% endblock site_title %}
 
+{% block extra_css%}
+    <link rel="stylesheet" href="{% static 'media/css/style.css' %}">
+{% endblock extra_css%}
+
 {% block content %}
+
     <h1> Universal Library </h1>
             <div class="row g-4">
                 
