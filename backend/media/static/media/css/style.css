@@ -33,3 +33,9 @@
     font-weight: bold;
     color: #212529;
 }
+
+.detail-poster{
+    aspect-ratio: 2 / 3;
+    object-fit: cover;
+    width: 100%;
+}
