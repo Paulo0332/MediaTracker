@@ -1,11 +1,29 @@
 {% extends "base.html" %}
-
+{% load static %}
 {% block site_title %}{{ block.super }}| Details{% endblock site_title %}
 
+{% block extra_css%}
+    <link rel="stylesheet" href="{% static 'media/css/style.css' %}">
+{% endblock extra_css%}
+
 {% block content %}
-    <p>Title: {{media.title}}</p>
-    <p>Creator: {{media.creator}}</p>
-    <p>Type: {{media.media_type}}</p>
-    <p>Summary: {{media.summary}}</p>
-    <p>Release date: {{media.release_date}}</p>
+    <div class="row">
+        <div class="col-md-4 mb-4">
+            {% if media.cover %}
+                <img src="{{media.cover}}" class="detail-poster rounded shadow">
+            {% else %}
+                <div class="detail-poster rounded shadow bg-dark text-white d-flex align-items-center justify-content-center">
+                    <h5>Cover was not found</h5>
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="col-md-8">    
+            <h1 class="display-2 fw-semibold mb-3">{{media.title}}</h1>
+            <p class="badge bg-dark mb-4">Creator: {{media.creator}}</p>
+            <p class="badge bg-primary">Release date: {{media.release_date}}</p>
+            <p class="badge bg-secondary">Type: {{media.get_media_type_display}}</p>
+            <p>Summary: {{media.summary}}</p>
+        </div>
+    </div>
 {% endblock content %}
