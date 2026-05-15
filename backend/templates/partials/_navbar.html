@@ -1,0 +1,37 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
+    <div class="container mt-2 d-flex">
+        
+        <div class="flex-grow-1 w-100">
+            <a class="navbar-brand fw-bold" href="{% url 'media:media-list' %}">MediaTracker</a>
+        </div>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainMenu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="mainMenu">
+            <ul class="navbar-nav mx-auto nav-underline">
+                <li class="nav-item">
+                    <a href="{% url 'media:media-list' %}" class="nav-link px-2 mx-3 {% if request.resolver_match.view_name == 'media:media-detail' %}active{% endif %}">Media</a>
+                </li>
+                <li class="nav-item">
+                    <a href="{% url 'media:media-list' %}" class="nav-link px-2 mx-3">Lists</a>
+                </li>
+                <li class="nav-item">
+                    <a href="{% url 'media:media-list' %}" class="nav-link px-2 mx-3 {% if request.resolver_match.view_name == 'media:media-list' %}active{% endif %}">Library</a>
+                </li>
+                <li class="nav-item">
+                    <a href="{% url 'media:media-list' %}" class="nav-link px-2 mx-3">Activity</a>
+                </li>
+                <li class="nav-item">
+                    <a href="{% url 'media:media-list' %}" class="nav-link px-2 mx-3">Profile</a>
+                </li>
+            </ul>  
+        </div>
+        <form class="flex-grow-1 d-flex justify-content-end w-100" role="search" method="GET">
+            <input class="form-control-sm rounded-pill me-2" type="search" name="q">
+            <button class="btn btn-outline-success rounded-pill">Search</button>
+        </form>
+
+</div>
+</nav>
