@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% load static %}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-6">
+            <div class="card bg-dark shadow p-4 rounded-3 text-white">
+                <h2 class="text-center mb-4">Login</h2>
+
+                <div class="row">
+                    <div class="col-12 col-md-7"> 
+                        <form method="POST" novalidate>
+                            {% csrf_token %}
+        
+                                {% for field in form %}
+                                    <div class="mb-3">
+                                        <label for="{{field.id_for_label}}" class="form-label fw-bold">
+                                            {{ field.label }}
+                                        </label>
+                                        <div class="form-control-wrapper">
+                                            {{ field }}
+                                        </div>
+                                        {% if field.errors %}
+                                            <div class="text-danger small mt-1">
+                                                {% for error in field.errors  %}
+                                                    <div>{{ error }}</div>
+                                                {% endfor %}
+                                            </div>
+                                        {% endif %}
+                                    </div>    
+                                {% endfor %}
+                                <div>
+                                    <button type="submit" class="btn btn-dark border border-white"> Enter </button>
+                                </div>
+                        </form>
+                    </div>
+                    
+                    <div class="col-12 col-md-5 text-center d-flex flex-column justify-content-center">
+                       
+                            <img src="{% static selected_character.icon %}" alt="Character's Icon" class="img-fluid  border-white mx-auto mb-2 w-75 rounded-circle"
+                            style="object-fit: cover; aspect-ratio: 1 / 1;">
+                            <p>"{{ selected_character.message }}" - {{selected_character.character}}</p>
+                     
+                    </div>              
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
