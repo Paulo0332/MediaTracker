@@ -1,9 +1,10 @@
 from django.shortcuts import render
 from django.views.generic import ListView,DetailView
 from media.models import Media
+from django.contrib.auth.mixins import LoginRequiredMixin
 # Create your views here.
 
-class MediaListView(ListView):
+class MediaListView(LoginRequiredMixin,ListView):
     model = Media
     context_object_name = "all_media"
     ordering = "title"
