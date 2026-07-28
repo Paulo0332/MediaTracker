@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 from pathlib import Path
 import os
+from decouple import config 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -148,3 +149,8 @@ LOGIN_REDIRECT_URL = 'media:media-list'
 LOGOUT_REDIRECT_URL = 'accounts:login'
 
 LOGIN_URL = 'accounts:login'
+
+#API's keys
+
+TMDB_API_TOKEN = config("TMDB_API_TOKEN", default="")
+TMDB_BASE_URL = "https://api.themoviedb.org/3"
