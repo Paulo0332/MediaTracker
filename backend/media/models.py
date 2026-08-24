@@ -34,6 +34,6 @@ class Media(MetaTime):
     
     
     def __str__(self):
-        return f"{self.title} - ({self.get_media_type_display()})"
+        return f"{self.title} - ({self.get_media_type_display()})"   # type: ignore (pylance not recognizing a Django handled function)
 
    
