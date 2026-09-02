@@ -1,3 +1,5 @@
+from django.conf import settings
+from django.core.exceptions import ImproperlyConfigured
 from .base import BaseApiClient
 from ..dtos import MediaItemDTO
 
@@ -9,6 +11,17 @@ class TmdbClient(BaseApiClient):
             base_url = self.BASE_URL,
             auth_token = auth_token
             )
+
+    @classmethod
+    def from_settings(cls) -> "TmdbClient":
+        token = getattr(settings, "TMDB_API_TOKEN", "")
+
+        if not token:
+            raise ImproperlyConfigured(
+                "TMDB_API_TOKEN is not configurated in Django settings or in the environment variables"
+            )
+
+        return cls(auth_token=token)
 
     def search_movies(self,query:str, page: int = 1) -> list[MediaItemDTO]:
         endpoint = "search/movie"
