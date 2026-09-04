@@ -6,6 +6,7 @@ class MediaItemDTO:
     id : int
     title: str
     media_type: str
+    provider: str
     release_date: Optional[int]
     overview: Optional[str]
     cover: Optional[str]
@@ -97,6 +98,7 @@ class MediaItemDTO:
             release_date = parsed_year,
             cover = complete_path,
             media_type = type_media,
+            provider = "tmdb",
             overview = summary,
             genres = parsed_genres,
             runtime = raw_runtime,

@@ -1,7 +1,7 @@
 from django.conf import settings
 from django.core.exceptions import ImproperlyConfigured
-from .base import BaseApiClient
-from ..dtos import MediaItemDTO
+from services.api_clients.base import BaseApiClient
+from services.dtos import MediaItemDTO
 
 class TmdbClient(BaseApiClient):
 
