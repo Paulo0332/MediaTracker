@@ -12,6 +12,8 @@ RUN apt-get update && apt-get install -y\
  make\    
  netcat-traditional\
  git\
+ wget\
+ procps\
 && rm -rf /var/lib/apt/lists/*
 
 # 5 - Copy dependencies list and install them
