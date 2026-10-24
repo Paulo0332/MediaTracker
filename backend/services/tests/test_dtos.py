@@ -12,13 +12,13 @@ class TestMediaDTOParsing(SimpleTestCase):
             "overview": "Set in the 22nd century...",
         }
 
-        dto = MediaItemDTO.from_tmdb_api(payload)
+        dto = MediaItemDTO.from_tmdb_movie(payload)
 
         self.assertEqual(dto.id, 603)
         self.assertEqual(dto.title, "The Matrix")
         self.assertEqual(dto.media_type,"MOVIE")
         self.assertEqual(dto.provider, "tmdb")
-        self.assertEqual(dto.release_date, 1999)
+        self.assertEqual(dto.release_year, 1999)
         self.assertEqual(dto.overview, "Set in the 22nd century...")
         self.assertEqual(dto.cover, "https://image.tmdb.org/t/p/w500/dXNAPwY7VrqMAo51EKhhCJfaGb5.jpg")
 
@@ -31,11 +31,11 @@ class TestMediaDTOParsing(SimpleTestCase):
             "overview": "Seven noble families fight...",
         }
 
-        dto = MediaItemDTO.from_tmdb_api(payload)
+        dto = MediaItemDTO.from_tmdb_series(payload)
 
         self.assertEqual(dto.title, "Game of Thrones")
         self.assertEqual(dto.media_type, "SERIES")
-        self.assertEqual(dto.release_date, 2011)
+        self.assertEqual(dto.release_year, 2011)
 
     def test_movie_details_credits_genres(self):
         payload = {
@@ -53,7 +53,7 @@ class TestMediaDTOParsing(SimpleTestCase):
             },
         }
 
-        dto = MediaItemDTO.from_tmdb_api(payload)
+        dto = MediaItemDTO.from_tmdb_movie(payload)
 
         self.assertEqual(dto.creator,"Lilly Wachowski, Lana Wachowski")
         self.assertEqual(dto.genres,("Action","Science Fiction"))
@@ -72,7 +72,7 @@ class TestMediaDTOParsing(SimpleTestCase):
             ],
         }
 
-        dto = MediaItemDTO.from_tmdb_api(payload)
+        dto = MediaItemDTO.from_tmdb_series(payload)
 
         self.assertEqual(dto.creator,"David Benioff, D.B. Weiss")
         self.assertEqual(dto.number_of_seasons, 8)
@@ -84,18 +84,18 @@ class TestMediaDTOParsing(SimpleTestCase):
         for bad_date in bad_dates:
             payload = {
                 "id": 10,
-                "name": "Unreleased Indie Movie",
+                "title": "Unreleased Indie Movie",
                 "release_date": bad_date
             }
 
-            dto = MediaItemDTO.from_tmdb_api(payload)
+            dto = MediaItemDTO.from_tmdb_movie(payload)
 
-            self.assertIsNone(dto.release_date, f"Expected None for date:{bad_date}")
+            self.assertIsNone(dto.release_year, f"Expected None for date:{bad_date}")
 
     def test_edge_case_missing_cover_and_crew(self):
         payload = {
             "id": 11,
-            "name": "Minimal Movie",
+            "title": "Minimal Movie",
             "poster_path": None,
             "credits":{
                 "crew": [
@@ -104,8 +104,16 @@ class TestMediaDTOParsing(SimpleTestCase):
             }
         }
 
-        dto = MediaItemDTO.from_tmdb_api(payload)
+        dto = MediaItemDTO.from_tmdb_movie(payload)
 
         self.assertIsNone(dto.cover)
         self.assertIsNone(dto.creator)
-        
+
+    def test_edge_case_missing_created_by(self):
+        payload = {
+            "id": 12,
+            "name": "True Detective",
+        }
+        dto = MediaItemDTO.from_tmdb_series(payload)
+
+        self.assertIsNone(dto.creator)

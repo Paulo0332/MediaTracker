@@ -28,13 +28,13 @@ class TmdbClient(BaseApiClient):
 
         params = {
             "query": query,
-            "page":page
+            "page": page
         }
 
         data = self._request("GET",endpoint=endpoint, params=params)
         items = data.get("results", [])
 
-        return [MediaItemDTO.from_tmdb_api(item) for item in items]
+        return [MediaItemDTO.from_tmdb_movie(item) for item in items]
 
     def search_series(self,query:str, page:int = 1) -> list[MediaItemDTO]:
         endpoint = "search/tv"
@@ -46,7 +46,7 @@ class TmdbClient(BaseApiClient):
 
         data = self._request("GET",endpoint=endpoint, params=params)
         items = data.get("results", [])
-        return [MediaItemDTO.from_tmdb_api(item) for item in items]
+        return [MediaItemDTO.from_tmdb_series(item) for item in items]
 
     def get_movie_details(self,tmdb_id:int) -> MediaItemDTO:    
         endpoint = f"movie/{tmdb_id}"
@@ -56,7 +56,7 @@ class TmdbClient(BaseApiClient):
         }
 
         movie = self._request("GET", endpoint=endpoint, params=params)
-        return MediaItemDTO.from_tmdb_api(movie)
+        return MediaItemDTO.from_tmdb_movie(movie)
 
     def get_series_details(self,tmdb_id:int) -> MediaItemDTO:
         endpoint = f"tv/{tmdb_id}" 
@@ -65,7 +65,7 @@ class TmdbClient(BaseApiClient):
         }
 
         series = self._request("GET",endpoint=endpoint,params=params)
-        return MediaItemDTO.from_tmdb_api(series)
+        return MediaItemDTO.from_tmdb_series(series)
         
 
         
