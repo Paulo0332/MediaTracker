@@ -200,14 +200,4 @@ docker compose exec web python manage.py test services.tests.test_dtos
 
 The current repository contains tests for media DTO transformations, base HTTP client behavior and user-media model rules. Some service test modules are still placeholders. These are unit/model tests and do not establish that the entire end-to-end application is production-ready.
 
-## Known limitations
-
-- **Ingestion mismatch:** `MediaItemDTO` uses `release_year`, but `MediaIngestionService` still refers to `dto.release_date`. The ingestion path needs to be updated before relying on it.
-- **Environment template:** `.env.example` needs to be aligned with the actual settings (especially `TMDB_API_TOKEN`).
-- **No complete external discovery flow:** The TMDB client methods exist, but the current pages do not expose media search or importing from TMDB.
-- **Collection UI incomplete:** Status, rating and review are modeled but do not yet have a complete user-facing management flow.
-- **Development configuration only:** Django's current settings are for local development, not deployment to production.
-
----
-
 Built as an ongoing software-engineering project. Contributions and improvements can be tracked through the repository history.
